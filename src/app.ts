@@ -13,6 +13,7 @@ createConnections(ormconfig).then(async connection => {
 
   ordersRoute(app);
   itemsRoute(app);
+
   app.listen(config.port, () => {
     console.log('Servidor escuchando en el puerto', config.port);
   });

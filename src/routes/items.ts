@@ -1,8 +1,6 @@
 import express from 'express';
-import { Request, Response } from "express";
-import { mysqlLib } from '../lib/mysql';
-import { config } from '../../config/config';
-import { Item } from '../database/orders/entities/item';
+import { Request, Response } from 'express';
+import { itemServices } from '../services/item';
 
 export function itemsRoute(app: any) {
   const router = express.Router();
@@ -15,7 +13,7 @@ export function itemsRoute(app: any) {
       response: Response,
       next: Function
     ) => {
-      response.json(await mysqlLib.getAll(Item));
+      response.json(await itemServices.getAll());
     }
   );
 
@@ -26,7 +24,7 @@ export function itemsRoute(app: any) {
       response: Response,
       next: Function
     ) => {
-      response.json(await mysqlLib.get(Item, request.params.id));
+      response.json(await itemServices.get(request.params.id));
     }
   );
 }

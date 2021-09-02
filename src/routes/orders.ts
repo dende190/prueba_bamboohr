@@ -1,8 +1,6 @@
 import express from 'express';
 import { Request, Response } from "express";
-import { mysqlLib } from '../lib/mysql';
-import { config } from '../../config/config';
-import { Order } from '../database/orders/entities/order';
+import { orderServices } from '../services/order';
 
 export function ordersRoute(app: any) {
   const router = express.Router();
@@ -15,7 +13,7 @@ export function ordersRoute(app: any) {
       response: Response,
       next: Function
     ) => {
-      response.json(await mysqlLib.get(Order));
+      response.json(await orderServices.getAll());
     }
   );
 
@@ -26,7 +24,40 @@ export function ordersRoute(app: any) {
       response: Response,
       next: Function
     ) => {
-      response.json(await mysqlLib.get(Order, request.params.id));
+      response.json(await orderServices.get(request.params.id));
+    }
+  );
+
+  router.post(
+    '/create',
+    async (
+      request: Request,
+      response: Response,
+      next: Function
+    ) => {
+      response.json(await orderServices.create(request.body));
+    }
+  );
+
+  router.post(
+    '/change-status',
+    async (
+      request: Request,
+      response: Response,
+      next: Function
+    ) => {
+      response.json(await orderServices.changeStatus(request.body));
+    }
+  );
+
+  router.get(
+    '/user/:id',
+    async (
+      request: Request,
+      response: Response,
+      next: Function
+    ) => {
+      response.json(await orderServices.getUserOrder(request.params.id));
     }
   );
 }

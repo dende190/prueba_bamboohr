@@ -16,6 +16,6 @@ export class OrderItem extends BaseEntity {
   id!: number
   @ManyToOne(type => Order, order => order.id) @JoinColumn()
   order!: Order
-  @OneToOne(type => Item) @JoinColumn()
+  @ManyToOne(type => Item, item => item.id) @JoinColumn()
   item!: Item
 }

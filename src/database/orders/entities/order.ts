@@ -4,16 +4,16 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   OneToMany,
-  JoinColumn
+  JoinColumn,
+  OneToOne
 } from 'typeorm';
-import { OrderItem } from './orderItem';
 
 @Entity()
 export class Order extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number
-  @OneToMany(type => OrderItem, order_item => order_item.item) @JoinColumn()
-  order_items!: OrderItem
+  @Column()
+  userId!: number
   @Column()
   subtotal!: number
   @Column()

@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/dende190/prueba_bamboohr#readme",
   "dependencies": {
+    "class-transformer": "^0.4.0",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "hdb-pool": "^0.1.6",
